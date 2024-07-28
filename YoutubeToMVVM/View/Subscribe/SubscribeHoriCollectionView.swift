@@ -2,7 +2,6 @@ import UIKit
 
 class SubscribeHoriCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-//    var subVideoContents: [SubVideoContent] = []
     var subVideoContents: [VideoModel] = []
     var welcome: SearchResponse?
     static let identifier = "SubscribeHoriCollectionView"
@@ -21,11 +20,6 @@ class SubscribeHoriCollectionView: UICollectionView, UICollectionViewDelegate, U
         self.collectionViewLayout = layout
         commonInit()
     }
-    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        commonInit()
-//    }
 
     private func commonInit() {
         self.isScrollEnabled = true

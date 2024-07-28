@@ -2,40 +2,37 @@ import UIKit
 
 
 
-class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavButtonItemsDelegate, MenuViewControllerDelegate {
+class BaseViewController: UIViewController, ButtonCollectionCellDelegate {
     
     func didTapFirstButton() {
         guard let window = UIApplication.shared.windows.first else { return }
-
+        
         let menuVC = MenuViewController()
-        menuVC.delegate = self
         menuVC.modalPresentationStyle = .overFullScreen
-
-        // 添加背景视图
+        
         let backgroundView = UIView(frame: window.bounds)
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         backgroundView.alpha = 0
-        backgroundView.tag = 100 // 用于识别
-        window.addSubview(backgroundView) // 添加到窗口而不是视图控制器的视图中
-
+        backgroundView.tag = 100
+        window.addSubview(backgroundView)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
-
-        // 设置 menuVC 的初始位置
+        
         let width = window.frame.width * 0.75
         let topInset = window.safeAreaInsets.top
         let bottomInset = window.safeAreaInsets.bottom
         menuVC.view.frame = CGRect(x: -width, y: topInset, width: width, height: window.frame.height - topInset - bottomInset)
-        window.addSubview(menuVC.view) // 添加到窗口而不是视图控制器的视图中
+        window.addSubview(menuVC.view)
         addChild(menuVC)
         menuVC.didMove(toParent: self)
-
+        
         UIView.animate(withDuration: 0.3, animations: {
             menuVC.view.frame = CGRect(x: 0, y: topInset, width: width, height: window.frame.height - topInset - bottomInset)
             backgroundView.alpha = 1
         })
     }
-
+    
     @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer) {
         if let menuVC = children.first(where: { $0 is MenuViewController }) as? MenuViewController {
             let width = UIApplication.shared.windows.first?.frame.width ?? 0 * 0.75
@@ -53,136 +50,6 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
                 }
             })
         }
-    }
-
-    
-//
-//    func didTapFirstButton() {
-//        let menuVC = MenuViewController()
-//        menuVC.delegate = self
-//        menuVC.modalPresentationStyle = .overFullScreen
-//
-//        // 添加背景视图
-//        let backgroundView = UIView(frame: self.view.bounds)
-//        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-//        backgroundView.alpha = 0
-//        backgroundView.tag = 100 // 用于识别
-//        self.view.addSubview(backgroundView)
-//
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-//        backgroundView.addGestureRecognizer(tapGesture)
-//
-//        // 设置 menuVC 的初始位置
-//        let width = self.view.frame.width * 0.75
-//        let topInset = view.safeAreaInsets.top
-//        let bottomInset = view.safeAreaInsets.bottom
-//        menuVC.view.frame = CGRect(x: -width, y: topInset, width: width, height: self.view.frame.height - topInset - bottomInset)
-//        self.view.addSubview(menuVC.view)
-//        self.addChild(menuVC)
-//        menuVC.didMove(toParent: self)
-//
-//        UIView.animate(withDuration: 0.3, animations: {
-//            menuVC.view.frame = CGRect(x: 0, y: topInset, width: width, height: self.view.frame.height - topInset - bottomInset)
-//            backgroundView.alpha = 1
-//        })
-//    }
-//
-//    @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer) {
-//        if let menuVC = children.first(where: { $0 is MenuViewController }) as? MenuViewController {
-//            let width = self.view.frame.width * 0.75
-//            let topInset = view.safeAreaInsets.top
-//            UIView.animate(withDuration: 0.3, animations: {
-//                menuVC.view.frame = CGRect(x: -width, y: topInset, width: width, height: self.view.frame.height - topInset - self.view.safeAreaInsets.bottom)
-//                if let backgroundView = self.view.viewWithTag(100) {
-//                    backgroundView.alpha = 0
-//                }
-//            }, completion: { _ in
-//                menuVC.view.removeFromSuperview()
-//                menuVC.removeFromParent()
-//                if let backgroundView = self.view.viewWithTag(100) {
-//                    backgroundView.removeFromSuperview()
-//                }
-//            })
-//        }
-//    }
-
-    
-    
-//    func didTapFirstButton() {
-//         let menuVC = MenuViewController()
-//         menuVC.delegate = self
-//         menuVC.modalPresentationStyle = .overFullScreen
-//
-//         // 添加背景视图
-//         let backgroundView = UIView(frame: self.view.bounds)
-//         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-//         backgroundView.alpha = 0
-//         backgroundView.tag = 100 // 用于识别
-//         self.view.addSubview(backgroundView)
-//
-//         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-//         backgroundView.addGestureRecognizer(tapGesture)
-//
-//         // 设置 menuVC 的初始位置
-//         let width = self.view.frame.width * 0.75
-//         menuVC.view.frame = CGRect(x: -width, y: 0, width: width, height: self.view.frame.height)
-//         self.view.addSubview(menuVC.view)
-//         self.addChild(menuVC)
-//         menuVC.didMove(toParent: self)
-//
-//         UIView.animate(withDuration: 0.3, animations: {
-//             menuVC.view.frame = CGRect(x: 0, y: 0, width: width, height: self.view.frame.height)
-//             backgroundView.alpha = 1
-//         })
-//     }
-//
-//     @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer) {
-//         if let menuVC = children.first(where: { $0 is MenuViewController }) as? MenuViewController {
-//             let width = self.view.frame.width * 0.75
-//             UIView.animate(withDuration: 0.3, animations: {
-//                 menuVC.view.frame = CGRect(x: -width, y: 0, width: width, height: self.view.frame.height)
-//                 if let backgroundView = self.view.viewWithTag(100) {
-//                     backgroundView.alpha = 0
-//                 }
-//             }, completion: { _ in
-//                 menuVC.view.removeFromSuperview()
-//                 menuVC.removeFromParent()
-//                 if let backgroundView = self.view.viewWithTag(100) {
-//                     backgroundView.removeFromSuperview()
-//                 }
-//             })
-//         }
-//     }
-    
-    func didSelect(menuItem: MenuViewController.MenuOptions) {
-        // 根據選擇的項目處理邏輯
-    }
-    
-
-        func didTapButton() {
-            print("BaseVC Button tapped in ButtonCollectionViewCell")
-            // 在這裡處理按鈕點擊的相應邏輯
-        }
-        
-    // 實現 BarButtonItemsDelegate 的方法，這些方法將調用 barButtonItemsModel 的對應方法
-    func setNavBtnItems() {
-        navButtonItemsModel.setNavBtnItems()
-    }
-    
-    func topButtonTapped(_ sender: UIBarButtonItem) {
-        navButtonItemsModel.topButtonTapped(sender)
-    }
-    
-    func presentSearchViewController() {
-        navButtonItemsModel.presentSearchViewController()
-    }
-    
-    func presentAlertController(title: String, message: String?) {
-        navButtonItemsModel.presentAlertController(title: title, message: message)
-    }
-    
-    func navigateToNotificationLogViewController() {
-        navButtonItemsModel.navigateToNotificationLogViewController()
     }
     
     var navButtonItemsModel: NavButtonItemsModel!
@@ -210,18 +77,18 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-        
-        
-        let buttonTitles = [" 📍 ", "全部", "音樂", "遊戲", "合輯", "直播中", "動畫", "寵物", "最新上傳", "讓你耳目一新的影片", "提供意見"]
-        
-        // 可以在這裡定義和配置你的 ButtonCollectionViewCell
-        lazy var buttonCollectionViewCell: ButtonCollectionViewCell = {
-            let cell = ButtonCollectionViewCell(frame: .zero)
-            cell.delegate = self
-            // 在這裡設置額外的配置，例如 cell 的位置和大小等
-            return cell
-        }()
-
+    
+    
+    let buttonTitles = [" 📍 ", "全部", "音樂", "遊戲", "合輯", "直播中", "動畫", "寵物", "最新上傳", "讓你耳目一新的影片", "提供意見"]
+    
+    // 可以在這裡定義和配置你的 ButtonCollectionViewCell
+    lazy var buttonCollectionViewCell: ButtonCollectionViewCell = {
+        let cell = ButtonCollectionViewCell(frame: .zero)
+        cell.delegate = self
+        // 在這裡設置額外的配置，例如 cell 的位置和大小等
+        return cell
+    }()
+    
     
     // 定義一個 UIImageView 用於顯示播放器符號
     lazy var playerSymbolImageView: UIImageView = {
@@ -230,7 +97,6 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "play.circle")
         imageView.tintColor = UIColor.systemBlue
-//        imageView.backgroundColor = .label
         imageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
@@ -243,7 +109,6 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Shorts"
         label.textAlignment = .left
-        // 設置顏色為適應深淺模式
         label.textColor = .systemGray
         label.font = UIFont.boldSystemFont(ofSize: 18) // 設置粗體 18PT
         label.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
@@ -287,9 +152,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
     var clickedVideoID: String?
     var clickedTitle: String?
     var clickedChannelTitle: String?
-
-//    var videoModels: [VideoModel] = []
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -308,7 +171,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         videoViewModel = VideoViewModel()
         videoViewModel.viewController = self
         
-        buttonCollectionViewCell.dataSource = self
+        buttonCollectionViewCell.delegate = self
         
         // 根据视图控制器类型加载不同的数据
         if let vcType = vcType {
@@ -319,32 +182,32 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
             guard let self = self else { return }
             self.handleVideoModelsLoaded(videoModels)
         }
-
+        
         // 添加点击手势识别器
         let shortsTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleShortsTap))
         shortsFrameCollectionView.addGestureRecognizer(shortsTapGesture)
-
+        
         let subscribeTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSubscribeTap))
         subscribeHoriCollectionView.addGestureRecognizer(subscribeTapGesture)
-
+        
         let singleVideoTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleVideoTap))
         singleVideoFrameView.addGestureRecognizer(singleVideoTapGesture)
-
+        
         otherVideoFrameViews.forEach { videoFrameView in
             let otherVideoTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOtherVideoTap(_:)))
             videoFrameView.addGestureRecognizer(otherVideoTapGesture)
         }
-
-    }
         
-        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-            super.traitCollectionDidChange(previousTraitCollection)
-            
-            // 調用 NavButtonItemsModel 的更新方法
-            navButtonItemsModel.handleTraitCollectionChange(previousTraitCollection: previousTraitCollection)
-        }
+    }
     
-
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // 調用 NavButtonItemsModel 的更新方法
+        // 切換深淺模式的時候，即時切換
+        navButtonItemsModel.handleTraitCollectionChange(previousTraitCollection: previousTraitCollection)
+    }
+    
+    
     @objc func handleShortsTap() {
         if let videoID = shortsFrameCollectionView.accessibilityIdentifier {
             clickedVideoID = videoID
@@ -352,7 +215,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         }
         print("BaseVC.handleShortsTap().clickedVideoID == \(clickedVideoID ?? "")")
     }
-
+    
     @objc func handleSubscribeTap() {
         if let videoID = subscribeHoriCollectionView.accessibilityIdentifier {
             clickedVideoID = videoID
@@ -360,7 +223,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         }
         print("BaseVC.handleSubscribeTap().clickedVideoID == \(clickedVideoID ?? "")")
     }
-
+    
     @objc func handleSingleVideoTap() {
         if let videoID = singleVideoFrameView.accessibilityIdentifier {
             clickedVideoID = videoID
@@ -368,7 +231,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         }
         print("BaseVC.handleSingleVideoTap().clickedVideoID == \(clickedVideoID ?? "")")
     }
-
+    
     @objc func handleOtherVideoTap(_ sender: UITapGestureRecognizer) {
         if let videoFrameView = sender.view, let videoID = videoFrameView.accessibilityIdentifier {
             clickedVideoID = videoID
@@ -376,51 +239,51 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         }
         print("BaseVC.handleOtherVideoTap().clickedVideoID == \(clickedVideoID ?? "")")
     }
-
+    
     func loadAndNavigateToShortsTableViewController(with videoID: String) {
         let playerViewController = PlayerViewController()
         playerViewController.selectedVideoID = videoID // 传递 videoID
-
+        
         // Hide back button in the navigation bar
         playerViewController.navigationItem.hidesBackButton = true
         playerViewController.navigationItem.leftBarButtonItem = nil
-
+        
         navigationController?.pushViewController(playerViewController, animated: true)
     }
-
-        func handleVideoModelsLoaded(_ videoModels: [VideoModel]) {
-            for (index, videoModel) in videoModels.enumerated() {
-                let title = videoModel.title
-                let thumbnailURL = videoModel.thumbnailURL
-                let channelTitle = videoModel.channelTitle
-                let videoID = videoModel.videoID
-                let viewCount = videoModel.viewCount ?? "沒"
-                let daysSinceUpload = videoModel.daysSinceUpload ?? "沒"
-                let accountImageURL = videoModel.accountImageURL
-
-                if index == 0 {
-                    singleVideoFrameView.accessibilityIdentifier = videoID // 保存 singleVideoFrameView 的 videoID
-                    loadDataVideoFrameView(withTitle: title, thumbnailURL: thumbnailURL, channelTitle: channelTitle, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
-                } else {
-                    let videoFrameView = otherVideoFrameViews[index - 1]
-                    videoFrameView.accessibilityIdentifier = videoID // 保存 otherVideoFrameViews 的 videoID
-                    loadDataVideoFrameView(withTitle: title, thumbnailURL: thumbnailURL, channelTitle: channelTitle, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
-                }
+    
+    func handleVideoModelsLoaded(_ videoModels: [VideoModel]) {
+        for (index, videoModel) in videoModels.enumerated() {
+            let title = videoModel.title
+            let thumbnailURL = videoModel.thumbnailURL
+            let channelTitle = videoModel.channelTitle
+            let videoID = videoModel.videoID
+            let viewCount = videoModel.viewCount ?? "沒"
+            let daysSinceUpload = videoModel.daysSinceUpload ?? "沒"
+            let accountImageURL = videoModel.accountImageURL
+            
+            if index == 0 {
+                singleVideoFrameView.accessibilityIdentifier = videoID // 保存 singleVideoFrameView 的 videoID
+                loadDataVideoFrameView(withTitle: title, thumbnailURL: thumbnailURL, channelTitle: channelTitle, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
+            } else {
+                let videoFrameView = otherVideoFrameViews[index - 1]
+                videoFrameView.accessibilityIdentifier = videoID // 保存 otherVideoFrameViews 的 videoID
+                loadDataVideoFrameView(withTitle: title, thumbnailURL: thumbnailURL, channelTitle: channelTitle, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
             }
         }
-        
-        func loadData(for vcType: ViewControllerType) {
-            switch vcType {
-            case .home:
-                videoViewModel.loadShortsCell(withQuery: "txt Dance shorts", for: .home)
-                videoViewModel.loadVideoView(withQuery: "TODO EP.", for: .home)
-            case .subscribe:
-                videoViewModel.loadShortsCell(withQuery: "IVE Dance shorts, newJeans Dance shorts", for: .subscribe)
-                videoViewModel.loadVideoView(withQuery: "TXT T:Time", for: .subscribe)
-            default:
-                break
-            }
+    }
+    
+    func loadData(for vcType: ViewControllerType) {
+        switch vcType {
+        case .home:
+            videoViewModel.loadShortsCell(withQuery: "txt Dance shorts", for: .home)
+            videoViewModel.loadVideoView(withQuery: "TODO EP.", for: .home)
+        case .subscribe:
+            videoViewModel.loadShortsCell(withQuery: "IVE Dance shorts, newJeans Dance shorts", for: .subscribe)
+            videoViewModel.loadVideoView(withQuery: "TXT T:Time", for: .subscribe)
+        default:
+            break
         }
+    }
     
     func updateContentSize() {
         contentView.layoutIfNeeded()
@@ -441,7 +304,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
             contentView.addSubview(subscribeHoriCollectionView)
         }
     }
-        
+    
     func calculateTotalHeight() -> CGFloat {
         switch vcType {
         case .home:
@@ -452,7 +315,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
             return 0
         }
     }
-
+    
     func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -462,8 +325,8 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
         shortsFrameCollectionView.translatesAutoresizingMaskIntoConstraints = false
         subscribeHoriCollectionView.translatesAutoresizingMaskIntoConstraints = false
         buttonCollectionViewCell.translatesAutoresizingMaskIntoConstraints = false
-
-
+        
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -475,7 +338,7 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalToConstant: totalHeight)
         ])
-
+        
         if vcType == .home {
             NSLayoutConstraint.activate([
                 
@@ -488,12 +351,12 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
                 singleVideoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 singleVideoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 singleVideoFrameView.heightAnchor.constraint(equalToConstant: 300),
-
+                
                 shortsStackView.topAnchor.constraint(equalTo: singleVideoFrameView.bottomAnchor),
                 shortsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 shortsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 shortsStackView.heightAnchor.constraint(equalToConstant: 60),
-
+                
                 shortsFrameCollectionView.topAnchor.constraint(equalTo: shortsStackView.bottomAnchor),
                 shortsFrameCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 shortsFrameCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -515,27 +378,27 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
                 singleVideoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 singleVideoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 singleVideoFrameView.heightAnchor.constraint(equalToConstant: 300),
-
+                
                 shortsStackView.topAnchor.constraint(equalTo: singleVideoFrameView.bottomAnchor),
                 shortsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 shortsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 shortsStackView.heightAnchor.constraint(equalToConstant: 60),
-
+                
                 subscribeHoriCollectionView.topAnchor.constraint(equalTo: shortsStackView.bottomAnchor),
                 subscribeHoriCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 subscribeHoriCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 subscribeHoriCollectionView.heightAnchor.constraint(equalToConstant: 330),
             ])
         }
-
+        
         // 添加其他 VideoFrameView 并设置约束
         var videoFrameViews: [VideoFrameView] = []
-
+        
         let firstVideoFrameView = VideoFrameView()
         firstVideoFrameView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(firstVideoFrameView)
         videoFrameViews.append(firstVideoFrameView)
-
+        
         if vcType == .home {
             NSLayoutConstraint.activate([
                 firstVideoFrameView.topAnchor.constraint(equalTo: shortsFrameCollectionView.bottomAnchor, constant: 10),
@@ -550,25 +413,25 @@ class BaseViewController: UIViewController, ButtonCollectionCellDelegate, NavBut
             firstVideoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             firstVideoFrameView.heightAnchor.constraint(equalToConstant: 300)
         ])
-
+        
         var previousView: UIView = firstVideoFrameView
-
+        
         for _ in 1..<4 {
             let videoFrameView = VideoFrameView()
             videoFrameView.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(videoFrameView)
             videoFrameViews.append(videoFrameView)
-
+            
             NSLayoutConstraint.activate([
                 videoFrameView.topAnchor.constraint(equalTo: previousView.bottomAnchor, constant: 10),
                 videoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 videoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 videoFrameView.heightAnchor.constraint(equalToConstant: 300)
             ])
-
+            
             previousView = videoFrameView
         }
-
+        
         otherVideoFrameViews = videoFrameViews
     }
     
@@ -615,9 +478,9 @@ extension BaseViewController {
             print("Configured VideoFrameView at index \(index) with title \(title)")
         }
     }
-
-
- }
+    
+    
+}
 
 extension Collection {
     subscript(safe index: Index) -> Element? {

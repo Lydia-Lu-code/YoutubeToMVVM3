@@ -9,23 +9,17 @@ import UIKit
 
 
 protocol ContentHeaderViewDelegate { // (Like:佈告欄)
-   
     func doSegueAction() // 跳轉下一頁 (動作)
-    
 }
-
-
 
 class ContentHeaderView: UIView {
     
-    var delegate:ContentHeaderViewDelegate? // 我要請人用,先給的說明書
-    
+    var delegate:ContentHeaderViewDelegate?
     
     let leftButton: UIButton = {
         let button = UIButton()
         button.setTitle("Left Button", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        // 添加按鈕的其他設置...
         return button
     }()
     
@@ -34,14 +28,12 @@ class ContentHeaderView: UIView {
         button.setTitle("Right Button", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(ContentHeaderView.self, action: #selector(turnPageAction), for: .touchUpInside)
-        // 添加按鈕的其他設置...
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setViews()
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,7 +56,6 @@ class ContentHeaderView: UIView {
     
     
     @objc func turnPageAction() {
-        
-        delegate?.doSegueAction() // 要請別人做的動作
+        delegate?.doSegueAction()
     }
 }

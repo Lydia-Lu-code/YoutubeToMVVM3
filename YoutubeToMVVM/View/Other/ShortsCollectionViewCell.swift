@@ -10,7 +10,6 @@ class ShortsCollectionViewCell: UICollectionViewCell {
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.imageView?.contentMode = .scaleAspectFill
-
         return button
     }()
     
@@ -31,9 +30,7 @@ class ShortsCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    var keywords: [String] = [""]
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setButton()
@@ -69,10 +66,6 @@ class ShortsCollectionViewCell: UICollectionViewCell {
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
 
-
-            
-        // 添加按鈕點擊事件處理程序
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     override func layoutSubviews() {
@@ -80,13 +73,6 @@ class ShortsCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 20
         self.layer.masksToBounds = true
     }
-    
-    @objc private func buttonTapped() {
-        print("SCVC Button tapped with keywords: \(keywords)")
-    }
-    
-
-
     
     public func setImage(from url: URL) {
         URLSession.shared.dataTask(with: url) { data, _, error in
@@ -101,14 +87,6 @@ class ShortsCollectionViewCell: UICollectionViewCell {
                 self.button.setImage(image, for: .normal)
             }
         }.resume()
-    }
-
-    
-
-
-    
-    public func setKeywords(_ keywords: [String]) {
-        self.keywords = keywords
     }
 }
 

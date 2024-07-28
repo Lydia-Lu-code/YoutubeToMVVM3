@@ -5,10 +5,6 @@ class ShortsTableViewCell: UITableViewCell {
     
     let emojiBtnView = ShortsEmojiBtnView()
     let shortsBtnView = ShortsBtnView()
-
-    
-//    var videoContent: String? // 新增一個用於存儲視頻內容的屬性
-//    var videoContents: [VideoModel] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,7 +42,7 @@ class ShortsTableViewCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             shortsBtnView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            shortsBtnView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -230), // 将顶部对齐到 contentView 的底部
+            shortsBtnView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -230),
             shortsBtnView.widthAnchor.constraint(equalToConstant: 320) // 固定宽度为 320
         ])
     }

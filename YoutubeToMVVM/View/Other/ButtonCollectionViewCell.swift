@@ -2,13 +2,11 @@ import UIKit
 
 protocol ButtonCollectionCellDelegate: AnyObject {
     var buttonTitles: [String] { get }
-    func didTapButton()
     func didTapFirstButton()
 }
 
 class ButtonCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    weak var dataSource: ButtonCollectionCellDelegate?
     weak var delegate: ButtonCollectionCellDelegate?
     
     static let identifier = "ButtonCollectionViewCell"
@@ -45,8 +43,7 @@ class ButtonCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, 
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.buttonTitles.count ?? 0
-        //        return buttonTitles.count
+        return delegate?.buttonTitles.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,7 +52,7 @@ class ButtonCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, 
             fatalError("Failed to dequeue ButtonCollectionViewButtonCell")
         }
         
-        let title = dataSource?.buttonTitles[indexPath.item] ?? ""
+        let title = delegate?.buttonTitles[indexPath.item] ?? ""
         cell.button.setTitle(title, for: .normal)
         cell.button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         
@@ -64,7 +61,7 @@ class ButtonCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, 
         cell.button.setTitleColor(UIColor.white, for: .normal) // 預設白色文字
         cell.button.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 按鈕字體大小
         
-        if let buttonTitles = dataSource?.buttonTitles, indexPath.item == buttonTitles.count - 1 {
+        if let buttonTitles = delegate?.buttonTitles, indexPath.item == buttonTitles.count - 1 {
             // 如果是最後一個按鈕，則設置特殊樣式
             cell.button.backgroundColor = UIColor.clear // 透明背景
             cell.button.setTitleColor(UIColor.blue, for: .normal) // 藍色文字
@@ -81,7 +78,7 @@ class ButtonCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let buttonTitles = dataSource?.buttonTitles else {
+        guard let buttonTitles = delegate?.buttonTitles else {
             return CGSize(width: 0, height: 0)
         }
         

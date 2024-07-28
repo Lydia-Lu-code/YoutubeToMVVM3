@@ -40,9 +40,8 @@ class ShortsBtnView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .darkGray
         btn.setTitle("訂閱", for: .normal)
-//        btn.setTitleColor(.white, for: .normal)
-        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) // 設置文字前後各+5
-        btn.layer.cornerRadius = 20 // 設置按鈕為橢圓形，半徑為按鈕高度的一半，假設高度是30
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        btn.layer.cornerRadius = 20
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 調整字體大小
         btn.clipsToBounds = true // 確保按鈕邊界是圓角
         return btn

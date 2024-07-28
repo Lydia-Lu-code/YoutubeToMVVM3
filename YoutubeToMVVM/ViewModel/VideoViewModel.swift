@@ -31,7 +31,7 @@ class VideoViewModel {
     var dataLoadedCallback: (([VideoModel]) -> Void)?
     private var dataTask: URLSessionDataTask?
     weak var viewController: BaseViewController?
-    private let apiKey = "AIzaSyDC2moKhNm_ElfyiKoQeXKftoLHYzsWwWY"
+    private let apiKey = "AIzaSyCvZYsFx7oIjm2mBOhVCHLJjzoqFo8GzCU"
     
     func cancelSearch() {
         dataTask?.cancel()
@@ -224,7 +224,7 @@ class VideoViewModel {
 
 class APIService {
     
-    private let apiKey = "AIzaSyDC2moKhNm_ElfyiKoQeXKftoLHYzsWwWY"
+    private let apiKey = "AIzaSyCvZYsFx7oIjm2mBOhVCHLJjzoqFo8GzCU"
     
     func getDataForVideoID(_ videoID: String, completion: @escaping (VideoModel?) -> Void) {
         let baseURL = "https://www.googleapis.com/youtube/v3/videos"

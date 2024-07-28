@@ -2,44 +2,18 @@
 import UIKit
 import WebKit
 
-class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonCollectionCellDelegate, NavButtonItemsDelegate, MenuViewControllerDelegate {
-    func didSelect(menuItem: MenuViewController.MenuOptions) {
-        //
-    }
+class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonCollectionCellDelegate {
     
     func didTapFirstButton() {
         
         let menuVC = MenuViewController()
-        menuVC.delegate = self
         menuVC.modalPresentationStyle = .overCurrentContext
         menuVC.modalTransitionStyle = .coverVertical
         present(menuVC, animated: true, completion: nil)
     }
-    
-    func setNavBtnItems() {
-        navButtonItemsModel.setNavBtnItems()
-    }
-    
-    func topButtonTapped(_ sender: UIBarButtonItem) {
-        navButtonItemsModel.topButtonTapped(sender)
-    }
-    
-    func presentSearchViewController() {
-        navButtonItemsModel.presentSearchViewController()
-    }
-    
-    func presentAlertController(title: String, message: String?) {
-        navButtonItemsModel.presentAlertController(title: title, message: message)
-    }
-    
-    func navigateToNotificationLogViewController() {
-        navButtonItemsModel.navigateToNotificationLogViewController()
-    }
-    
+        
     var navButtonItemsModel: NavButtonItemsModel!
-    
-    
-    
+
     let buttonTitles = ["👍|👎", "分享", "Remix", "超級感謝", "下載", "剪輯片段", "儲存", "檢舉", ""]
     
     var videosData: [VideoModel] = []
@@ -54,7 +28,6 @@ class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var dataLoadedCallback: (([VideoModel]) -> Void)?
     var videoFrameView = VideoFrameView()
     var videoViewModel = VideoViewModel()
-//    var videoViewModel: VideoViewModel!
     
     
     let playerView: WKWebView = {
@@ -96,8 +69,6 @@ class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         navButtonItemsModel = NavButtonItemsModel(viewController: self)
         navButtonItemsModel.setNavBtnItems()
-
-        buttonCollectionViewCell.dataSource = self
         
         // 设置 WKWebView 的约束，应用 UIEdgeInsets
         NSLayoutConstraint.activate([
@@ -148,11 +119,6 @@ class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 tabBar.scrollEdgeAppearance = tabBarAppearance
             }
         }
-    }
-    
-    func didTapButton() {
-        print("PVC Button tapped in ButtonCollectionViewCell")
-        // 在這裡處理按鈕點擊的相應邏輯
     }
     
     func loadYouTubeVideo(videoID: String, height: Int) {

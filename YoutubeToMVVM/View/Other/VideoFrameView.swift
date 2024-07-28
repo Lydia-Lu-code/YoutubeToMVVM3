@@ -59,13 +59,6 @@ class VideoFrameView: UIView {
         setCustomVideoFrameViewLayout()
     }
     
-//    // 初始化方法
-//    override init(frame: CGRect) {
-//        super.init(frame: .zero)
-//        setCustomVideoFrameViewLayout()
-//        
-//    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -73,7 +66,6 @@ class VideoFrameView: UIView {
     // 設置子視圖佈局
     private func setCustomVideoFrameViewLayout() {
         self.addSubview(videoImgView)
-//        self.addSubview(videoView)
         self.addSubview(photoImageView)
         self.addSubview(labelMidTitle)
         self.addSubview(labelMidOther)
@@ -91,11 +83,6 @@ class VideoFrameView: UIView {
             videoImgView.topAnchor.constraint(equalTo: self.topAnchor),
             videoImgView.widthAnchor.constraint(equalTo: videoImgView.heightAnchor, multiplier: 320/180),
             videoImgView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-//            videoView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            videoView.topAnchor.constraint(equalTo: self.topAnchor),
-//            videoView.widthAnchor.constraint(equalTo: videoView.heightAnchor, multiplier: 320/180),
-//            videoView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.topAnchor.constraint(equalTo: videoImgView.bottomAnchor, constant: 8),

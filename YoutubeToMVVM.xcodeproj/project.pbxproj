@@ -46,7 +46,6 @@
 		5CC1D89E2C539FE0003448FE /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1D8782C539FE0003448FE /* VideoViewModel.swift */; };
 		5CC1D89F2C539FE0003448FE /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1D87A2C539FE0003448FE /* UIViewController+Additions.swift */; };
 		5CC1D8A02C539FE0003448FE /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1D87C2C539FE0003448FE /* Observable.swift */; };
-		5CC1D8A12C539FE0003448FE /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1D87D2C539FE0003448FE /* SlideInTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +90,6 @@
 		5CC1D8782C539FE0003448FE /* VideoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
 		5CC1D87A2C539FE0003448FE /* UIViewController+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
 		5CC1D87C2C539FE0003448FE /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		5CC1D87D2C539FE0003448FE /* SlideInTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +274,6 @@
 			children = (
 				5CC1D87B2C539FE0003448FE /* Additions */,
 				5CC1D87C2C539FE0003448FE /* Observable.swift */,
-				5CC1D87D2C539FE0003448FE /* SlideInTransition.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -376,7 +373,6 @@
 				5CC1D8952C539FE0003448FE /* PlayerViewController.swift in Sources */,
 				5CC1D8972C539FE0003448FE /* ShortsEmojiBtnView.swift in Sources */,
 				5CC1D8892C539FE0003448FE /* NotificationTableViewCell.swift in Sources */,
-				5CC1D8A12C539FE0003448FE /* SlideInTransition.swift in Sources */,
 				5CC1D8882C539FE0003448FE /* NotificationLogVC.swift in Sources */,
 				5CC1D89F2C539FE0003448FE /* UIViewController+Additions.swift in Sources */,
 				5CC1D8812C539FE0003448FE /* MainTabBarController.swift in Sources */,

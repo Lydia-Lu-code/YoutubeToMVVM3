@@ -10,9 +10,7 @@ class ShortsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.backgroundColor = .systemBackground
-        
+
         tableView.register(ShortsTableViewCell.self, forCellReuseIdentifier: "ShortsTableViewCell")
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         tableView.decelerationRate = .fast
@@ -34,7 +32,6 @@ class ShortsTableViewController: UITableViewController {
             // 確保在數據加載後進行初始對齊
             self?.snapToNextCell()
             self?.tableView.rowHeight = UIScreen.main.bounds.height
-//            self?.alignCellToBottom()
         }
         
         // 加載 shorts cell 的數據
@@ -46,7 +43,6 @@ class ShortsTableViewController: UITableViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
         if previousTraitCollection?.userInterfaceStyle != traitCollection.userInterfaceStyle {
             updateTabBarAppearance()
 

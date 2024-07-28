@@ -2,7 +2,6 @@ import UIKit
 
 class ShortsFrameCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-//    var videoContents: [VideoContent] = []
     var videoContents: [VideoModel] = []
     var welcome: SearchResponse?
     static let identifier = "ShortsFrameCollectionView"

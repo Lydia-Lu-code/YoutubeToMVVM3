@@ -38,5 +38,4 @@ class SearchViewController: UIViewController {
         // 在这里添加返回按钮点击后的逻辑
         navigationController?.popViewController(animated: true)
     }
-
 }

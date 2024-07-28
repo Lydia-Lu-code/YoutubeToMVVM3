@@ -1,29 +1,12 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    
-//    let menuViewController = MenuViewController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewControllers()
  
     }
-    
-//    @objc func showMenu() {
-//        // 將 MenuViewController 視圖疊加在當前視圖控制器的視圖上
-//        addChild(menuViewController)
-//        view.addSubview(menuViewController.view)
-//        menuViewController.didMove(toParent: self)
-//
-//    }
-//    
-//    func didSelect(menuItem: MenuViewController.MenuOptions) {
-//        // 處理選單選項的選擇
-//        print("選擇了選項: \(menuItem.rawValue)")
-//        menuViewController.view.removeFromSuperview()
-//        menuViewController.removeFromParent()
-//    }
 
     private func setViewControllers() {
         // HomeVC

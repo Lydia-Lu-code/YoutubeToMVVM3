@@ -1,13 +1,7 @@
-////
-////  ConVideoFrameView.swift
-////  YoutubeToMVVM
-////
-////  Created by Lydia Lu on 2024/6/3.
-////
-//
+
 import UIKit
 
-
+// ContentViewController的Cell裡面
 class ConVideoFrameView: UIView {
 
     override init(frame: CGRect) {

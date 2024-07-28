@@ -32,18 +32,13 @@ class NotificationLogVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        title = "通知"
 
-         // 設置標題
-         title = "通知"
-
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
 
-
-        
         // 添加 collectionView 到 ViewController 的 view 中
         view.addSubview(collectionView)
         
@@ -59,16 +54,13 @@ class NotificationLogVC: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            
-    
-            
+
             // collectionView 約束
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 40), // 高度設置
-            
- 
+
             customView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -80,15 +72,12 @@ class NotificationLogVC: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 
-
         ])
         
         // Configure the CustomView
         let image = UIImage(systemName: "bell")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
 
         customView.configure(image: image, text1: "﻿別錯過新影片", text2: "絕不錯過訂閱頻道推出的最新影片", buttonText: "啟用通知功能")
-
-
         
         // 註冊 cell
         collectionView.register(NotificationTopButtonCollectionCell.self, forCellWithReuseIdentifier: buttonCellIdentifier)
@@ -101,24 +90,8 @@ class NotificationLogVC: UIViewController {
         let moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonTapped))
         navigationItem.rightBarButtonItems = [moreButton, searchButton, displayButton]
 
-        navButtonItemsModel = NavButtonItemsModel(viewController: self)
-        navButtonItemsModel.setNavBtnItems()
-        
         updateTabBarAppearance()
         
-
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        // 通知 NavButtonItemsModel traitCollection 改變
-        navButtonItemsModel?.handleTraitCollectionChange(previousTraitCollection: previousTraitCollection)
-        
-        if previousTraitCollection?.userInterfaceStyle != traitCollection.userInterfaceStyle {
-            updateTabBarAppearance()
-
-        }
     }
     
     private func updateTabBarAppearance() {
@@ -253,26 +226,17 @@ extension NotificationLogVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
         
         // 這裡使用你的圖片名稱來設置圖片
         let image = UIImage(named: "image1")
         
         cell.configure(image: image, title: "This is a long text for testing three lines in the title label. This is a long text for testing three lines in the title label. This is a long text for testing three lines in the title label.", subtitle: "3天前")
-            
-        
-        // 設置 cell 的內容
-//        cell.configure(image: image, title: "Title \(indexPath.row + 1)", subtitle: "3天前")
         
         return cell
     }
-    
-
     
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))

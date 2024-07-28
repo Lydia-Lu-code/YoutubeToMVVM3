@@ -1,7 +1,7 @@
 import UIKit
 
+// let buttonTitles = ["﻿全部","「提及」的通知"]，設定這兩個按鈕
 class NotificationTopButtonCollectionCell: UICollectionViewCell {
-
     
     private let button: UIButton = {
         let button = UIButton()
